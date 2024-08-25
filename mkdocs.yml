@@ -1,0 +1,87 @@
+site_name: Basic MkDocs Example Project
+theme:
+  name: readthedocs
+  highlightjs: true
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        # See: https://mkdocstrings.github.io/python/usage/
+        python:
+          options:
+            docstring_style: sphinx
+markdown_extensions:
+  - markdown_include.include:
+      base_path: .
+  - admonition
+
+
+nav:
+  - Home: 'index.md'
+  - 'User Guide':
+    - 'Writing your docs': 'writing-your-docs.md'
+    
+nav:
+  - 前言: 
+    - '介绍': 'index.md'
+    - '编程安全': 'safety_program.md'
+  - RUST入门:
+    - '介绍': 'base/easy.md'
+    - '基元类型': 'base/primitive_Type.md'
+    - '(不)可变量绑定': 'base/let.md'
+    - '函数': 'base/fn.md'
+    - 'flow control': 'base/flow_control.md'
+    - '自定义类型': 'base/struct_tuple.md'
+    - '枚举类型': 'base/enum.md'
+    - '总结': 'base/conclusion.md'
+
+  - RUST OOP基础:
+    - '关联函数和方法': 'oop_base/method.md'
+    - '泛型': 'oop_base/generic.md'
+    - '特征': 'oop_base/trait.md'
+    - '特征区间': 'oop_base/trait_bound.md'
+    - '多态': 'oop_base/dispatch.md'
+
+  - 代码管理:
+    - '模块': 'cargo/mod.md'
+    - 'crate': 'cargo/crate.md'
+    - 'use关键字': 'cargo/use.md'
+
+  - 内存管理和安全:
+    - '前置基础': 'mem_safe/intro.md'
+    - '所有权': 'mem_safe/ownership.md'
+    - '借用': 'mem_safe/borrow.md'
+    - '生命周期': 'mem_safe/lifetime.md'
+    - '指针基础': 'mem_safe/pointer.md'
+    - '智能指针:Box': 'mem_safe/Box_pointer.md'
+    - '智能指针:Rc&Cell': 'mem_safe/rc_pointer.md'
+    - '内存对齐/mem模块': 'mem_safe/mem.md'
+
+  - 异常处理:
+    - '异常简介': 'error/intro.md'
+    - '可恢复异常': 'error/recoverable.md'
+    - '更多解包': 'error/unwrap.md'
+
+  - 进阶特性:
+    - '再谈类型': 'advance/type.md'
+    - '闭包': 'advance/clousre.md'
+    - '迭代器': 'advance/iterator.md'
+    - '模式匹配': 'advance/match.md'
+
+  - 宏和元编程:
+    - '前置基础': 'macro/intro.md'
+    - '过程宏': 'macro/proc.md'
+    - '声明宏': 'macro/macro_rule.md'
+
+  - 并发:
+    - '前置基础': 'lock/intro.md'
+    - '数据共享': 'lock/share_data.md'
+    - '线程安全': 'lock/thread_safe.md'
+
+  - unsafe&外部语言交互:
+    - '不安全介绍': 'unsafe/intro.md'
+    - 'C语言交互': 'unsafe/C.md'
+
+
+ # - RUST for Linux:
+
