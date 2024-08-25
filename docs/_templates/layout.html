@@ -1,14 +1,9 @@
-{% extends "!layout.html" %} 
+{% extends "!layout.html" %}
 
 {% block extrahead %}
-{{ super() }}
-<script type="text/javascript" charset="UTF-8" src="//cdn.cookie-script.com/s/e2161b46916dc50affb53e3fe8e7d56c.js"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L240ET5MQ8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  {{ super() }}
 
-  gtag('config', 'G-L240ET5MQ8');
-</script>
-{% endblock %}
+  {% if READTHEDOCS %}
+  <script defer data-domain="{{ plausible_domain }}" src="https://plausible.io/js/script.js"></script>
+  {% endif %}
+{% endblock extrahead %}
