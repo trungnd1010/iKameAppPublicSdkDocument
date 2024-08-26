@@ -1,0 +1,26 @@
+{% load i18n %}
+<ul>
+  {% if dict.pdf %}
+  <li class="module-item col-span d-block">
+    <a class="module-item-title d-block" href="{{ dict.pdf }}">
+        {{ version.slug }} PDF
+    </a>
+  </li>
+  {% endif %}
+
+  {% if dict.html %}
+  <li class="module-item col-span d-block">
+    <a class="module-item-title d-block" href="{{ dict.html }}">
+        {{ version.slug }} HTMLZip
+    </a>
+  </li>
+  {% endif %}
+
+  {% if dict.epub %}
+  <li class="module-item col-span">
+    <a class="module-item-title d-block" href="{{ dict.epub }}">
+        {{ version.slug }} Epub
+    </a>
+  </li>
+  {% endif %}
+</ul>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{{ active_lang }}" class="no-js" prefix="og: http://ogp.me/ns#">
+<head>
+  <title>{% block title %}Documenti pubblici, digitali.{% endblock %}{% block head_title %}{% endblock %} - {% block branding %}Docs Italia {% endblock %}</title>
+  {% include 'docsitalia/includes/head.html' %}
+  {% block robots %}
+    {% comment %}Hides Staging environment from robots{% endcomment %}
+    {% if PRODUCTION_DOMAIN != "docs.italia.it" %}
+    <meta name="robots" content="noindex, nofollow">
+    {% endif %}
+  {% endblock %}
+</head>
+<body>
+  {% include 'docsitalia/includes/cookiebar.html' %}
+  {% include 'docsitalia/includes/header.html' %}
+
+  {% block content %}{% endblock content %}
+
+  <a href="#" title="{{ t.scrolltop_label }}" class="ScrollTop js-scrollTop js-scrollTo">
+    <i class="ScrollTop-icon Icon-collapse" aria-hidden="true"></i>
+    <span class="u-hiddenVisually">{{ t.scrolltop_label }}</span>
+  </a>
+  {% include 'docsitalia/includes/footer.html' %}
+  {% include 'docsitalia/includes/scripts.html' %}
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

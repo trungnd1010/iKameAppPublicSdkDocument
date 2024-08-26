@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+    {% block title %}
+      {% trans "Pagina non trovata" %}
+    {% endblock %}
+
+    {% block header-wrapper %}
+      {% include "error_header.html" %}
+    {% endblock %}
+
+{% block content %}
+<div>
+  <h1>404</h1>
+  <h2>Pagina non trovata</h2>
+  <p>Oops! La pagina che cerchi non è stata trovata, <a href="javascript:history.back();" title="Torna alla pagina precedente">torna indietro</a> o utilizza il menu per continuare la navigazione.</p>
+  <a href="/">Torna alla Home</a>
+</div>
+{% endblock %}

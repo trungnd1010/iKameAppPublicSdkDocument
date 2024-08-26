@@ -1,0 +1,50 @@
+{% load i18n %}
+{% load core_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{ active_lang }}" class="no-js" prefix="og: http://ogp.me/ns#">
+<head>
+  <title>{% block title %}Documenti pubblici, digitali.{% endblock %}{% block head_title %}{% endblock %} - {% block branding %}Docs Italia {% endblock %}</title>
+  {% include 'docsitalia/includes/head.html' %}
+  {% block robots %}
+    {% comment %}Hides Staging environment from robots{% endcomment %}
+    {% if PRODUCTION_DOMAIN != "docs.italia.it" %}
+    <meta name="robots" content="noindex, nofollow">
+    {% endif %}
+  {% endblock %}
+  {% block extra_links %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  {% include 'docsitalia/includes/header.html' %}
+  {% block subnav-bar %}{% endblock %}
+  {% block project_editing %}{% endblock %}
+
+  <!-- BEGIN content-->
+  <div id="content" class="container py-5">
+    <div class="wrapper">
+
+      {% if messages %}
+        <ul class="notifications">
+          {% for message in messages %}
+            <li class="notification notification-{{ message.level }}" {% if message.pk %}data-dismiss-url="{% url 'message_mark_read' message.pk %}{% endif %}">
+              {{ message }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% block content-header %}
+      {% endblock %}
+
+      {% block content %}
+      {% endblock %}
+
+    </div>
+  </div>
+  <!-- END content-->
+
+  {% include 'docsitalia/includes/footer.html' %}
+  {% include 'docsitalia/includes/scripts.html' %}
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

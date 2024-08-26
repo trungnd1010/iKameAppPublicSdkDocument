@@ -1,0 +1,31 @@
+{% load i18n %}
+{% load static %}
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+    <span>
+      {% if request.user.get_full_name %}
+        {{ request.user.get_full_name}}
+      {% else %}
+        {{ request.user }}
+      {% endif %}
+    </span>
+    <svg class="icon icon-xs">
+      <use xlink:href="{% get_static_prefix %}vendor/bootstrap-italia/svg/sprite.svg#it-expand"></use>
+    </svg>
+  </a>
+  <div class="dropdown-menu">
+    <div class="link-list-wrapper">
+      <ul class="link-list">
+        <li>
+          <h3 id="heading">Il tuo profilo</h3>
+        </li>
+        <li><a class="list-item" href="{% url 'projects_dashboard' as projects_dashboard %}{{ projects_dashboard }}"><span>{% trans "My Projects" %}</span></a></li>
+        <li><a class="list-item" href="{% url 'profiles_profile_edit' as profiles_profile_edit %}{{ profiles_profile_edit }}"><span>{% trans "Settings" %}</span></a></li>
+        <li><a class="list-item" href="https://docs.italia.it/italia/docs-italia/docs-italia-guide/it/bozza/come-partecipare.html#amministratori-di-docs-italia-e-assistenza" target="_blank"><span>{% trans "Support" %}</span></a></li>
+        <li><span class="divider"></span></li>
+        <li><a class="list-item" href="{% url 'account_logout' as account_logout %}{{ account_logout }}"><span>{% trans "Log Out" %}</span></a></li>
+      </ul>
+    </div>
+  </div>
+</li>

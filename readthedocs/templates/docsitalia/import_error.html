@@ -1,0 +1,14 @@
+{% extends "projects/import_base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <h3>{% trans "Error" %}</h3>
+
+  {% if error_msg %}
+    <p class="error">{{ error_msg }}</p>
+  {% endif %}
+
+  {% for field, error in error_list.items %}
+    <p class="error">{{ field }}: {{ error }}</p>
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<ul class="project_edit__menu col-12 col-md-4 col-lg-3 col-xl-2 px-3 px-md-0">
+    <li class="{% block project-edit-active %}{% endblock %}"><a href="{% url "projects_edit" project.slug %}">{% trans "Settings" %} </a></li>
+    <li class="{% block project-advanced-active %}{% endblock %}"><a href="{% url "projects_advanced" project.slug %}">{% trans "Advanced Settings" %} </a></li>
+    <li class="{{ builds_active }}"><a href="{{ project.get_builds_url }}">{% trans "Builds" %}</a></li>
+    {# FIXME: Enable for #241 <li class="{% block project-translations-active %}{% endblock %}"><a href="{% url "projects_translations" project.slug %}">{% trans "Translations" %}</a></li>#}
+    {# FIXME: Enable for #269 <li class="{% block project-subprojects-active %}{% endblock %}"><a href="{% url "projects_subprojects" project.slug %}">{% trans "Subprojects" %}</a></li>#}
+    <li class="{{ versions_active }}"><a href="{% url "project_version_list" project.slug %}" rel="nofollow,noindex">{% trans "Versions" %}</a></li>
+    <li class="{% block project-notifications-active %}{% endblock %}"><a href="{% url "projects_notifications" project.slug %}">{% trans "Notifications" %}</a></li>
+</ul>

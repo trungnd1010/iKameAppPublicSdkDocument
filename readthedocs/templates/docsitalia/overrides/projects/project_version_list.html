@@ -1,0 +1,130 @@
+{% extends "projects/base_project.html" %}
+{% load i18n %}
+{% load projects_tags %}
+{% load privacy_tags %}
+{% load core_tags %}
+
+{% block title %}
+Versions
+{% endblock title %}
+
+{% block project_editing %}
+  {% with versions_active="active" %}
+    {% include "core/project_bar.html" %}
+  {% endwith %}
+{% endblock %}
+
+
+{% block content %}
+
+
+<div id="project_edit" class="module">
+  <div class="wrapper">
+    <div class="navigable row">
+      {% include 'projects/project_dashboard_sidebar.html' %}
+  <div class="project-version-list col-12 col-md-8 col-lg-9 col-xl-10 px-3 px-md-0 pl-md-5">
+    <div class="module">
+      <div class="module-wrapper">
+
+        <div class="module-header">
+          <h1>{% trans "Active Versions" %}</h1>
+        </div>
+
+        <div class="module-list">
+          <div class="module-list-wrapper">
+            <ul>
+              {% for version in active_versions|sort_version_aware %}
+                {% block active-versions %}
+                  <li class="module-item d-flex flex-column flex-md-row flex-wrap justify-content-between align-middle">
+                    {# Link to the docs #}
+                    <a class="module-item-title" href="{{ version.get_absolute_url }}">{{ version.slug }}</a>
+
+                  <span class="module-list-version-details d-flex align-middle flex-row justify-content-between">
+                    {% if request.user|is_admin:project %}
+                      <span class="ml-0">
+                        {{ version.get_privacy_level_display }}
+                      </span>
+                    {% endif %}
+
+                    {% if not version.slug in version.identifier %}
+                      <span class="quiet version-branch">{{ version.identifier_friendly|truncatechars:24 }}</span>
+                    {% endif %}
+
+
+                    {% if request.user|is_admin:project %}
+                      <a class="version-button mr-sm-0" href="{% url "project_version_detail" project.slug version.slug %}">{% trans "Edit" %}</a>
+                    {% else %}
+                      <a class="version-button mr-sm-0" href="{{ version.get_absolute_url }}">{% trans "View Docs" %}</a>
+                    {% endif %}
+                  </span>
+
+                  </li>
+                {% endblock active-versions %}
+
+              {% empty %}
+                <li class="module-item">
+                  <p class="quiet">
+                    {% trans "No active versions." %}
+                  </p>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    {% if request.user|is_admin:project or request.user.is_staff %}
+    <div class="module project-versions-inactive">
+      <div class="module-wrapper">
+
+        {% if inactive_versions %}
+          <div class="module-header">
+            <h1>{% trans "Inactive Versions" %}</h1>
+          </div>
+
+          <div class="module-list">
+            <div class="module-list-wrapper">
+              <ul>
+                {% for version in inactive_versions|sort_version_aware %}
+
+                  {% block inactive-versions %}
+                    <li class="module-item d-flex flex-column flex-md-row flex-wrap justify-content-between align-middle">
+                      {# Link to the docs #}
+                      <span class="quiet">{{ version.slug }}</span>
+
+                      <span class="module-list-version-details d-flex align-middle flex-row justify-content-between">
+                        {% if request.user|is_admin:project %}
+                          <span class="ml-0">
+                            {{ version.get_privacy_level_display }}
+                          </span>
+                        {% endif %}
+
+                        {% if not version.slug in version.identifier_friendly %}
+                          <span class="quiet version-branch">{{ version.identifier_friendly|truncatechars:24 }}</span>
+                        {% endif %}
+
+                        {% if request.user|is_admin:project %}
+                            <a class="version-button mr-sm-0" href="{% url "project_version_detail" project.slug version.slug %}">{% trans "Edit" %}</a>
+                        {% endif %}
+                      </span>
+
+                    </li>
+                  {% endblock inactive-versions %}
+
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

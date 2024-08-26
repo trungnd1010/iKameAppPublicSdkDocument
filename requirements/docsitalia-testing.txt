@@ -1,0 +1,4 @@
+requests-mock
+-r docsitalia-base.txt
+-r testing.txt
+psycopg2==2.8.3 --no-binary psycopg2

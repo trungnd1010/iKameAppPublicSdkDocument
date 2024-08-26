@@ -1,0 +1,70 @@
+{% extends "docsitalia/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="blue-to-transparent-up py-5">
+  <section class="container">
+    <h1 class="text-white mb-4">Cos’è Docs Italia</h1>
+  </section>
+</div>
+<div class="my-5">
+  <section class="container d-flex justify-content-left">
+    <article class="col-sm-10 simplelayout-main-text">
+      <h2 id="informazioni">Informazioni</h2>
+      <div class="simplelayout-main-content my-2 my-md-5">
+        <p>Docs Italia è un servizio a disposizione delle Pubbliche Amministrazioni per pubblicare documenti tecnici e amministrativi, e offre ai cittadini la possibilità di leggere e commentare documenti pubblici ed essere informati sull’andamento dei progetti.</p>
+        <p>Su Docs Italia trovi:</p>
+        <ul>
+          <li>
+            <h3 class="h6">Documentazione tecnica relativa ai progetti pubblici</h3>
+            <p>Per esempio, su Docs Italia è possibile accedere alla documentazione relativa al progetto per costruire l’<a href="https://docs.italia.it/italia/anpr/anpr/it/bozza/">Anagrafe nazionale della popolazione residente in Italia</a></p>
+          </li>
+          <li>
+            <h3 class="h6">Documenti amministrativi, circolari, linee guida, regole tecniche, direttive</h3>
+            <p>Per esempio, su Docs Italia è disponibile il <a href="https://docs.italia.it/italia/piano-triennale-ict/codice-amministrazione-digitale-docs">Codice dell’Amministrazione Digitale</a>, la legge che definisce il ruolo del digitale nella Pubblica Amministrazione</p>
+          </li>
+        </ul>
+      </div>
+      <h2 id="caratteristiche">Caratteristiche</h2>
+      <div class="simplelayout-main-content my-2 my-md-5">
+        <ul>
+          <li>
+            <h3 class="h6">Collaborazione</h3>
+            <p>Docs Italia consente un processo di pubblicazione e di modifica di tipo collaborativo: tutti possono proporre contributi e suggerimenti ai documenti.</p>
+          </li>
+          <li>
+            <h3 class="h6">Consultazione pubblica</h3>
+            <p>Secondo una filosofia <em>open government</em>, Docs Italia consente di gestire il <a href="https://docs.italia.it/italia/piano-triennale-ict/codice-amministrazione-digitale-docs/it/v2017-12-13/_rst/capo1_sezione3_art18.html?highlight=consultazione%20pubblica">processo di consultazione pubblica di un documento amministrativo</a> previsto dall’art. 18 del Codice dell’Amministrazione digitale.</p>
+          </li>
+          <li>
+            <h3 class="h6">Un luogo unico</h3>
+            <p>Docs Italia vuole diventare il luogo che offre una visione di insieme sui progetti pubblici in corso, affiancando gli aspetti tecnologici e quelli amministrativi (leggi: la documentazione tecnica e le circolari in un unico luogo!)</p>
+          </li>
+          <li>
+            <h3 class="h6">I documenti evolvono!</h3>
+            <p>Docs Italia (utilizzando il version control system di GitHub, <a href="https://it.wikipedia.org/wiki/Git_(software)">basato su Git</a>) mette a disposizione un sistema che consente di tenere traccia della storia di un documento e mantenerne tutte le versioni, permettendo di confrontarle fra loro.</p>
+          </li>
+          <li>
+            <h3 class="h6">Facilità di lettura, anche sullo smartphone</h3>
+            <p>I documenti di Docs Italia hanno un indice ben strutturato, un motore di ricerca efficace e sono di facile lettura, anche sullo smartphone.</p>
+          </li>
+        </ul>
+
+        <p><a href="https://docs.italia.it/italia/docs-italia/docs-italia-guide/it/bozza/"><strong>Guida a Docs Italia</strong></a></p>
+      </div>
+
+      <h2 id="evoluzione-del-progetto">Evoluzione del progetto</h2>
+      <div class="simplelayout-main-content my-2 my-md-5">
+        <p>Docs Italia è una piattaforma basata sul progetto open source <a href="https://readthedocs.org/">Read the Docs</a>. Anche il codice stesso di Docs Italia è open source e visibile a tutti nel <a href="https://github.com/italia/docs.italia.it">repository GitHub</a> del progetto.</p>
+        <p>Siamo al lavoro per creare e migliorare le sue funzionalità e sviluppare la piattaforma: dal motore di ricerca alla navigazione, dalle modalità di conversione di un documento allo stile della documentazione, sono tante le novità in arrivo nei prossimi mesi.</p>
+        <p>Per discutere del progetto puoi usare il Forum:</p>
+
+        <ul>
+          <li><a href="https://forum.italia.it/t/docs-italia-tutte-le-novita/2610">Tutte le novità su Docs Italia</a></li>
+          <li><a href="https://forum.italia.it/t/nuova-style-guide-per-documenti-tecnici-e-amministrativi/2608">Style guide per la documentazione tecnica</a></li>
+        </ul>
+      </div>
+    </article>
+  </section>
+</div>
+{% endblock %}

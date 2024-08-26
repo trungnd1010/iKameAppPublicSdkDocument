@@ -1,0 +1,27 @@
+{% load i18n %}
+{% load static %}
+
+<!-- BEGIN wide search bar -->
+<form id="id_site_form" action="{% url 'search' %}" method="GET" autocomplete="off">
+  <div class="form-group autocomplete-wrapper-big">
+    <input
+      type="search"
+      class="autocomplete search-main-input"
+      name="q"
+      autocomplete="off"
+      id="id_site_search"
+      value="{{ term }}"
+      placeholder="{% trans 'Search all the docs' %}"
+    >
+    <span class="autocomplete-icon" aria-hidden="true">
+      <svg class="icon icon-sm">
+        <use xlink:href="{% get_static_prefix %}vendor/bootstrap-italia/svg/sprite.svg#it-search"></use>
+      </svg>
+    </span>
+
+    <!-- Results list -->
+    <ul class="autocomplete-list" id="id_site_search_results"></ul>
+
+    <label for="id_site_search" class="sr-only">{% trans 'Search all the docs' %}</label>
+  </div>
+</form>

@@ -1,0 +1,55 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account %}
+{% load static %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block body_class %}login-page{% endblock %}
+
+{% block content %}
+<section class="container" style="max-width: 40em">
+  <h1 class="pb-5">{% trans "Log In" %}</h1>
+
+  <form class="login" method="POST" action="{% url "account_login" %}">
+    {% csrf_token %}
+    {% for field in form %}
+      {%comment%}Better using a custom filter for detecting CheckboxInput here {% endcomment%}
+      {% if field.name != 'remember' %}
+      <div class="form-group">
+        <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" class="form-control {% if field.field.widget.input_type == 'password' %}input-password{% endif %}" id="id_{{ field.name }}">
+        <label for="id_{{ field.name }}">{{ field.label }}</label>
+        {% if field.field.widget.input_type == 'password' %}
+        <span class="password-icon bg-transparent" aria-hidden="true">
+          <svg class="password-icon-visible icon icon-sm"><use xlink:href="{% get_static_prefix %}vendor/bootstrap-italia/svg/sprite.svg#it-password-visible"></use></svg>
+          <svg class="password-icon-invisible icon icon-sm d-none"><use xlink:href="{% get_static_prefix %}vendor/bootstrap-italia/svg/sprite.svg#it-password-invisible"></use></svg>
+        </span>
+        {% endif %}
+      </div>
+      {% else %}
+      <div class="form-check">
+        <input id="id_{{ field.name }}" name="{{ field.name }}" type="checkbox">
+        <label for="id_{{ field.name }}">{{ field.label }}</label>
+      </div>
+      {% endif %}
+    {% endfor %}
+
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <div class="py-4 login_buttons">
+      <button class="btn btn-primary" type="submit">{% trans "Log In" %}</button>
+    <span class="px-3 my-3 my-md-0">oppure</span>
+      {% include "socialaccount/snippets/provider_list.html" with process="login" next=request.GET.next verbiage="Sign in with" %}
+
+      <p>{% url 'account_reset_password' as password_reset_url %}</p>
+    </div>
+    <p>Se non hai ancora creato un account, <a href="{{ signup_url }}">registrati</a> adesso.</p>
+    <p>Se invece hai dimenticato la password, puoi <a href="{{ password_reset_url }}">reimpostarla</a>.</p>
+  </form>
+</section>
+
+
+
+{% endblock content %}

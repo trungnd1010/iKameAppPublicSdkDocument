@@ -1,0 +1,100 @@
+{% extends "docsitalia/base.html" %}
+{% load i18n %}
+{% load docs_italia %}
+
+{% block content %}
+{% comment %}
+Pagina di dettaglio del publisher con la lista
+dei publisher projects
+{% endcomment %}
+<section>
+  <div class="pb-5">
+    <div class="shadow-sm pb-4 pt-2">
+      <div class="container">
+        <div class="mb-2">{% include 'docsitalia/includes/breadcrumb.html' %}</div>
+        <div class="d-flex flex-row">
+          {% if publisher.metadata.publisher.logo_url %}
+            <img class="d-block mr-4" style="max-width: 100px" src="{{publisher.metadata.publisher.logo_url}}" alt='{{ object }} logo'>
+          {% endif %}
+          <div class="d-flex flex-column align-items-start justify-content-center">
+            <h1 class="mb-0">{{ object }}</h1>
+            {% if publisher.metadata.publisher.website %}
+              <a class="text small" href='{{publisher.metadata.publisher.website}}' target="_blank">{{publisher.metadata.publisher.website}}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h3 class="mb-3 mt-5 font-weight-normal">Tutti i progetti dell'amministrazione {{ object }}</h3>
+      <div class="row d-flex p-2 border-bottom">
+        <span class="text">
+          {% if object.active_publisher_projects.count == 0 %}
+            Nessun risultato
+          {% elif object.active_publisher_projects.count == 1 %}
+            {{ object.active_publisher_projects.count }} risultato
+          {% else %}
+            {{ object.active_publisher_projects.count }} risultati
+          {% endif %}
+        </span>
+      </div>
+
+      <div class="row">
+        {% for project in object.active_publisher_projects %}
+          {% include 'docsitalia/includes/project_card.html' %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="publisher-metadata">
+  {% if object.metadata %}
+  {{ object.metadata.name }}
+  <a href="{{ object.metadata.website }}">{{ object.metadata.website }}</a>
+  {{ object.metadata.description }}
+  <img src="{{ object.metadata.assets.logo }}"/>
+  {% endif %}
+</div>
+<div class="publisher-projects-metadata">
+  {% if object.projects_metada %}
+  {{ object.projects_metadata.title }}
+  {{ object.projects_metadata.description }}
+  {{ object.projects_metadata.website }}
+  {% endif %}
+</div>
+{% comment %}
+<div class="publisher-search" style="display: none">
+  Questo è il popup di ricerca
+  ancora da definire
+  <a class="js-publisher-search-close">close</a>
+  {% include "core/widesearchbar.html" %}
+  <strong>Ricerche frequenti</strong>
+  <ul>
+    <li>
+      <a>Tag 1</a>
+    </li>
+    <li>
+      <a>Tag 2</a>
+    </li>
+    <li>
+      <a>Progetto Spid</a>
+    </li>
+  </ul>
+</div>
+{% endblock %}
+La search bar dentro il publisher %}
+{% block extra_scripts %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.js-publisher-search-close').on('click', function () {
+            $('.publisher-search').hide();
+        });
+        $('.js-open-publisher-search').on('click', function () {
+            $('.publisher-search').show();
+        });
+    });
+</script>
+{% endcomment %}
+{% endblock %}

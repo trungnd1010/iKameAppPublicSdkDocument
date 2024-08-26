@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="col-12 col-md-4 col-lg-3 item p-2 p-md-3">
+  <div class="card-wrapper">
+    <div class="card">
+      <div class="card-body">
+        <div class="categoryicon-top mb-2">
+          <svg class="icon icon-primary">
+            <use xlink:href="{% get_static_prefix %}vendor/bootstrap-italia/svg/sprite.svg#it-folder"></use>
+          </svg>
+          <span class="text">{{ project.active_documents.count }} documenti</span>
+        </div>
+
+        {% if project.short_name %}
+          <h6 class="mb-1 font-weight-bold primary-color">{{ project.short_name }}</h6>
+        {% endif %}
+
+        <a href="{% block card_url %}{{ project.get_absolute_url }}{% endblock %}">
+          <h5 class="card-title font-weight-normal">{{ project }}</h5>
+        </a>
+
+        <p class="card-text">{{ project.description|safe }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+
+django-restricted-sessions
+django-autocomplete-light==3.4.1
+git+https://github.com/italia/docs-italia-convertitore-web.git@master#egg=docs-italia-convertitore-web

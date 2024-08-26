@@ -1,0 +1,31 @@
+{% extends "docsitalia/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<section class="container py-5">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="neutral-1-color">Amministrazioni</h1>
+    </div>
+    <div class="col-md-6">
+      <h2 class="mb-4 font-weight-normal">Tutti gli enti che hanno pubblicato documenti su Docs Italia.</>
+    </div>
+    <div class="col-md-5 offset-md-1">
+      <h2 class="h4">Sei un'amministrazione?</h2>
+      <p>Il progetto è aperto a tutte le Pubbliche Amministrazioni, collabora con noi!</p>
+      <a href="{% url 'about_docs_italia' %}" class="btn btn-sm btn-primary">come partecipo</a>
+    </div>
+  </div>
+  <div class="row my-3 py-3 border-top">
+    {% for publisher in object_list %}
+    <div class="amministrazione col-sm-6 col-md-4 my-2">
+      {% with metadata=publisher.metadata.publisher %}
+      <div class="d-block amministrazione__logo" style="background-image: url({% if metadata.logo_url %}{{ metadata.logo_url }}{% else %}{{ MEDIA_URL }}docsitalia/icons/icon-type-administrations.svg{% endif %})"></div>
+      <p class="d-block amministrazione__nome m-0 font-weight-bold">{{ metadata.name }}</p>
+      <a class="d-block amministrazione__link text-uppercase font-weight-bold x-small" href="{% url 'publisher_detail' publisher.slug %}">Vai al dettaglio →</a>
+      {% endwith %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

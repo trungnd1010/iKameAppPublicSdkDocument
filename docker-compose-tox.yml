@@ -1,0 +1,53 @@
+version: '3.4'
+services:
+  py36:
+    container_name: italia_docs_italia_it_test
+    build:
+      context: .
+      target: docs_italia_it_test
+    image: italia/docs_italia_it_test:latest
+    depends_on:
+      - db
+      - es
+    command: bash -c "wait-for-it -s -t 300 db:5432 -- tox -e py36 $TOX_ARGS -- --including-search --create-db $PYTEST_ARGS"
+    env_file:
+      - .dockerenv
+    volumes:
+      - ".:/app:rw"
+      - tox:/app/.tox
+
+  itresolver:
+    container_name: italia_docs_italia_it_itresolver
+    build:
+      context: .
+      target: docs_italia_it_test
+    image: italia/docs_italia_it_test:latest
+    depends_on:
+      - db
+    command: bash -c "wait-for-it -s -t 300 db:5432 -- tox -e itresolver $TOX_ARGS -- --create-db $PYTEST_ARGS"
+    env_file:
+      - .dockerenv
+    volumes:
+      - ".:/app:rw"
+      - tox:/app/.tox
+
+  db:
+    image: postgres:10
+    environment:
+      - POSTGRES_PASSWORD=docs
+      - POSTGRES_USER=docs
+      - POSTGRES_DB=rtd
+
+  es:
+    build:
+      context: docker/elasticsearch
+    environment:
+      - cluster.name=docsitalia
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - 9200:9200
+      - 9300:9300
+
+volumes:
+  tox:
